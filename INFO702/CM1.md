@@ -50,6 +50,14 @@ int& t2 = t[2]
 
 void set7(int& i){ i = 7; }
 int k = 3;
-set7(k) // 7
+set7(k); // 7
+
+const int& j = k;
+// j permet la lecture de la valeur de k
+
+void f(const T& t){
+    ..
+    // passage par référence constante, utile quand t n'est pas une type de base
+}
 ```
 
