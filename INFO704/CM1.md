@@ -56,3 +56,36 @@ ainsi, moins de l'algo fait de tels opérations élémentaires, plus il est rapi
 ### formalisation 
 
 un **problème** est une fonction reliant son entrée dont la valeur n'est pas spécifiée à sa sortie.
+
+```
+Ex: Pb de tri
+entrée : la tableau d'entiers
+```
+
+une **instance** d'un problème est une spécification des valeurs d'entrée.
+
+```
+Ex: [1, 3, 2, 7, 5] est une instance 
+```
+
+la **complexité  temporelle d'un algo** est la fonction que `à un entier n`, retourne grand nombre d'étapes  (opérations élémentaires) nécessaire pour résoudre une `instance de taille n`. (pire des cas)
+
+le calcul exact et d'une telle fonction est difficile : 
+
+- il dépend des opérations élémentaires
+- il dépend du choix d'encodage / structure de donnée
+- utilisation d'approximation : si n est petit ? si n est grand ?
+
+Ex :
+
+- n<sup>3</sup> + 8
+- 25 + 8n<sup>2</sup>
+
+### quelques outils mathématiques 
+
+Dans ce cours, on utilise 3 types de fonctions
+
+- fonction exponentielle : 指数
+- fonction polynomiale : 多项式
+- fonction logarithme : 对数
+
