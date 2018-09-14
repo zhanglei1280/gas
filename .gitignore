@@ -61,3 +61,5 @@ typings/
 .next
 .DS_Store
 INFO702/.vscode/settings.json
+
+.idea
