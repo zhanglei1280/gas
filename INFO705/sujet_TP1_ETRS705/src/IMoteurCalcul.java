@@ -2,7 +2,7 @@ package calculator.generic;
 
 
 /**
- * Interface décrivant un moteur de calcul d'expressions arithmétiques simples.
+ * Interface dï¿½crivant un moteur de calcul d'expressions arithmï¿½tiques simples.
  * 
  */
 public interface IMoteurCalcul {

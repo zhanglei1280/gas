@@ -11,8 +11,8 @@ import javax.swing.*;
 
 /**
  * La classe <code>Calculatrice</code> est l'interface graphique d'une
- * calculatrice simple. Le calcul des résultats sera effectué par un moteur de
- * calcul séparé spécifié par l'interface <code>IMoteurCalcul</code>.
+ * calculatrice simple. Le calcul des rï¿½sultats sera effectuï¿½ par un moteur de
+ * calcul sï¿½parï¿½ spï¿½cifiï¿½ par l'interface <code>IMoteurCalcul</code>.
  * 
  */
 
