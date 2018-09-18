@@ -1,4 +1,4 @@
-package calcultor.socketjava;
+package calculator.socketjava;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class Client {
 	    @SuppressWarnings("resource")
 		Socket S = new Socket(host, port);
 	    
-	    String expression = "3+2";
+	    String expression = "3+5";
 	    System.out.println("<< Client : expression : " + expression);
 	    //String expression2 = "(4 - 3.14) * (2 - 5)";
 		

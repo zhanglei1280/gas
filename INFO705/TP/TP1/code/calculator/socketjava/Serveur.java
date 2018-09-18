@@ -1,4 +1,4 @@
-package calcultor.socketjava;
+package calculator.socketjava;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
