@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/yinyanfr/s7#readme",
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-register": "^6.26.0",
     "expect": "^23.6.0",
     "mocha": "^5.2.0"
   }
