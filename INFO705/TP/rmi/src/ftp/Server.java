@@ -14,10 +14,11 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class Server implements FTP {
 
-    private Path path = Paths.get(".");
+    private Path path;
 
     public Server(){
-
+        this.path = Paths.get(".");
+        cd(".");
     }
 
 
@@ -61,10 +62,11 @@ public class Server implements FTP {
     @Override
     public String pwd() {
         //this.path = Paths.get(".").toAbsolutePath();
-        return this.path.toAbsolutePath().toString();
+        return this.path.normalize().toString();
     }
 
     public static void main(String args[]){
+
         try {
             Server obj = new Server();
             FTP stub = (FTP) UnicastRemoteObject.exportObject(obj, 0);
