@@ -4,7 +4,7 @@ import socket from "./socket"
 class Compter extends Component{
 
     state = {
-        compter: 0
+        compter: null
     }
 
     componentDidMount = e => {
@@ -31,10 +31,18 @@ class Compter extends Component{
     render(){
         return (
             <div>
-                <div>{this.state.compter}</div>
-                <button onClick={this.step(1)}>+</button>
-                <button onClick={this.step(-1)}>-</button>
-                <button onClick={this.reset}>reset</button>
+                {
+                    this.state.compter == null
+                    ? <div>loading</div>
+                    : (
+                        <div>
+                            <div>{this.state.compter}</div>
+                            <button onClick={this.step(1)}>+</button>
+                            <button onClick={this.step(-1)}>-</button>
+                            <button onClick={this.reset}>reset</button>
+                        </div>
+                    )
+                }
             </div>
         )
     }
