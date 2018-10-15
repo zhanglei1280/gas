@@ -2,7 +2,8 @@ LD=g++
 CXX=g++ -g -c
 
 EXEC_SRC=\
-	testGrayLevelImage2D.cpp
+	double-brightness.cpp
+	# testGrayLevelImage2D.cpp
 
 MODULE_SRC=\
 	GrayLevelImage2D.cpp
@@ -14,7 +15,10 @@ EXEC_PRG=${EXEC_SRC:.cpp=}
 
 all: ${EXEC_PRG} ${MODULE_OBJ} ${EXEC_OBJ}
 
-testGrayLevelImage2D: testGrayLevelImage2D.o ${MODULE_OBJ}
+# testGrayLevelImage2D: testGrayLevelImage2D.o ${MODULE_OBJ}
+# 	${LD} ${MODULE_OBJ} $< -o $@
+
+double-brightness: double-brightness.o ${MODULE_OBJ}
 	${LD} ${MODULE_OBJ} $< -o $@
 
 .cpp.o: %.cpp %.hpp

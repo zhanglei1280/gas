@@ -17,14 +17,14 @@ GrayLevelImage2D::GrayLevelImage2D(int w, int h, GrayLevel g)
     }
 }
 
-int GrayLevelImage2D::index(int x, int y) const{
+int GrayLevelImage2D::index(int x, int y) const
+{
     return x * (m_height - 1) + m_width - 1;
 }
 
 GrayLevelImage2D::Iterator::Iterator(GrayLevelImage2D &Image, int x, int y)
-: Container::iterator( Image.m_data.begin() + Image.index (x,y) )
+    : Container::iterator(Image.m_data.begin() + Image.index(x, y))
 {
-    
 }
 
 int GrayLevelImage2D::w() const
@@ -67,7 +67,7 @@ GrayLevelImage2D::begin()
 GrayLevelImage2D::Iterator
 GrayLevelImage2D::end()
 {
-    return Iterator(*this, m_width, m_height-1);
+    return Iterator(*this, m_width, m_height - 1);
 }
 
 GrayLevelImage2D::Iterator
@@ -79,18 +79,21 @@ GrayLevelImage2D::start(int x, int y)
 bool GrayLevelImage2D::importPGM(std::istream &input)
 {
     // Ouvre le flux en entrée sur le fichier "toto.pgm"
-    ifstream input("toto.pgm", std::ios::binary); // le ios::binary est nécessaire seulement sous Windows.
+    //std::ifstream input("toto.pgm", std::ios::binary); // le ios::binary est nécessaire seulement sous Windows.
     // teste si tout va bien
     if (!input.good())
-        std::cerr << "Probleme !";
-    // par exemple, lit un entier:
-    int i;
-    input >> i;
-    // par exemple, lit un mot (s'arrête à un caractères de séparation.
-    std::string s;
-    input >> s;
-    // par exemple, lit toute une ligne dans une chaîne de caractères.
-    std::getline(input, str);
-    if ((str != "") && (str[0] == '#'))
-        std::cout << "C'est un commentaire ! J'ignore superbement";
+        return false;
+    std::string str;
+    input >> str;
+    while(!input.eof()){
+        std::getline(input, str);
+        if (!((str != "") && (str[0] == '#')))
+            std::cout << str << std::endl;
+    }
+    return true;
+}
+
+bool GrayLevelImage2D::exportPGM(std::ostream &output, bool ascii)
+{
+    return true;
 }
