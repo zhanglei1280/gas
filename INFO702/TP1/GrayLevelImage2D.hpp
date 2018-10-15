@@ -5,6 +5,10 @@
 #include <vector>
 #include <exception>
 
+#include <string> // chaînes de caractères
+#include <fstream> // flux sur les fichiers
+#include <sstream> // flux sur les chaînes de caractères
+
 
 class GrayLevelImage2D {
 
