@@ -16,9 +16,15 @@ GrayLevelImage2D::GrayLevelImage2D(int w, int h, GrayLevel g)
         m_data.push_back(g);
     }
 }
+
+int GrayLevelImage2D::index(int x, int y) const{
+    return x * (m_height - 1) + m_width - 1;
+}
+
 GrayLevelImage2D::Iterator::Iterator(GrayLevelImage2D &Image, int x, int y)
+: Container::iterator( Image.m_data.begin() + Image.index (x,y) )
 {
-    Image.m_data.begin() += (x * (Image.m_height - 1) + y - 1);
+    
 }
 
 int GrayLevelImage2D::w() const
@@ -61,7 +67,7 @@ GrayLevelImage2D::begin()
 GrayLevelImage2D::Iterator
 GrayLevelImage2D::end()
 {
-    return Iterator(*this, 0, m_height);
+    return Iterator(*this, m_width, m_height-1);
 }
 
 GrayLevelImage2D::Iterator
