@@ -19,28 +19,31 @@ const plateauRead = path => fs.readFileSync(path)
     .filter(e => e.length > 0)
     .map(e => parseInt(e))
 
-console.log(plateauRead(__dirname+"/Pb1/10"))
 // a
 const sommeMinRec = (t, i) => {
     if(i === 0) return 0
-    let opt = Infinity
-    let tmp
-    for(let i of [1, 3, 5]){
-        if(x <= 1){
-            tmp = t[1] + sommeMinRec(t, i-x)
-        }
-        if(tmp < opt){
-            opt = tmp
+    var opt = Infinity
+    var tmp
+    for(let x of [1, 3, 5]){
+        if(x <= i){
+            tmp = t[i] + sommeMinRec(t, i-x)
+            if(tmp < opt){
+                opt = tmp
+            }
         }
     }
     return opt
 }
 
-const sommeMin = path => {
+const sommeMinRecRead = path => {
     const t = plateauRead(path)
-    return sommeMinRec(t, t.length)
+    return sommeMinRec(t, t.length-1)
 }
 
+// b
+// La taille d'entree: la taille de t
+// La complexite temporelle: n^2
+
 module.exports = {
-    sommeMin
+    sommeMinRecRead
 }
