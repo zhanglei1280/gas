@@ -61,6 +61,8 @@ public:
   bool importPGM( std::istream & input );
   bool exportPGM( std::ostream & output, bool ascii = true );
 
+  void set(int x, int y, int pixel);
+
   
 
 private:
