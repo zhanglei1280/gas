@@ -1,24 +1,24 @@
 const {
     uniq,
-    reverse
+    reverse,
+    filter
 } = require("lodash")
 
 const CHOtoCHNO = graph => {
-    const reversed = graph.links.concat([]).map(e => reverse(e))
-    graph.links = graph.links.concat(reversed)
+    const reversed = [...graph.links].map(e => reverse([...e]))
+    graph.links = [...graph.links, ...reversed]
 }
 
 const isUniq = arr => arr.length === uniq(arr).length
 
 const isSameElement = (arr1, arr2) => (
-    arr1.every(e => arr2.includes(e))
-    &&
+    arr1.every(e => arr2.includes(e)) &&
     arr2.every(e => arr1.includes(e))
 )
 
 const includeArr = (arr, e) => {
-    for(let i = 0; i < arr.length; i++){
-        if(isSameElement(arr[i], e)){
+    for (let i = 0; i < arr.length; i++) {
+        if (isSameElement(arr[i], e)) {
             return true
         }
     }
@@ -32,7 +32,9 @@ const isSubset = (arr1, arr2) => arr1.every(e => includeArr(arr2, e))
  */
 const reduceCycle = cycle => {
     if (cycle.length <= 1) return []
-    return [[cycle[0], cycle[1]]].concat(reduceCycle(cycle.slice(1)))
+    return [
+        [cycle[0], cycle[1]]
+    ].concat(reduceCycle(cycle.slice(1)))
 }
 
 /**
@@ -45,15 +47,30 @@ const flatten = arrays => [].concat.apply([], arrays);
 const range = (lo, hi) => [...new Array(hi - lo + 1)].map((_, i) => i + lo)
 const join = joiner => list => list.join(joiner)
 
-const charSeqs = (n, chars) => (n < 1) 
-    ? [[]]
-    : flatten(chars.map(char => charSeqs(n - 1, chars).map(
+const charSeqs = (n, chars) => (n < 1) ?
+    [
+        []
+    ] :
+    flatten(chars.map(char => charSeqs(n - 1, chars).map(
         seq => flatten([char].concat(seq))
-      )))
+    )))
 
 const allCharSeqs = (n, chars) => flatten(range(1, n).map(i => charSeqs(i, chars)))
 
 const allSubsets = arr => allCharSeqs(arr.length, arr)
+
+const pathToString = path => path.reduce((m, n) => m + " -> " + n)
+
+const findLinks = (graph, point, limit) => {
+    if (limit > 0) {
+        var paths = filter(graph.links, e => e[0] === point)
+        for (let i of paths) {
+            console.log(i)
+            return [point, ...findLinks(graph, i[1], limit - 1)]
+        }
+    }
+    return [];
+}
 
 module.exports = {
     CHOtoCHNO,
@@ -61,5 +78,7 @@ module.exports = {
     isSameElement,
     isSubset,
     reduceCycle,
-    allSubsets
+    allSubsets,
+    pathToString,
+    findLinks
 }

@@ -3,7 +3,13 @@ const {
     remove, trim
 } = require("lodash")
 
+const {CHOtoCHNO} = require("./utils")
+const {oneCycle} = require("./tp2")
 
+const isCHNO = graph => {
+    CHOtoCHNO(graph)
+    return oneCycle(graph)
+}
 
 const readGraph = path => new Promise((resolve, reject) => {
     fs.readFile(path, (err, data) => {
@@ -21,6 +27,10 @@ const parseGraph = data => {
     remove(data, e => e.length < 1)
     const links = remove(data, e => /-/.test(e)).map(e => e.split(/ *- */))
     const points = trim(data[0]).split(/ +/g)
+    const graph = {points, links: [...links]}
+    if(!isCHNO(graph)){
+        return Promise.reject("not CHNO")
+    }
     return {
         points, links
     }

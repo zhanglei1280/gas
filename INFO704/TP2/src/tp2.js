@@ -1,11 +1,11 @@
-const parser = require("./grapheParser")
 const {
-    CHOtoCHNO,
     isUniq,
     isSameElement,
     isSubset,
     reduceCycle,
-    allSubsets
+    allSubsets,
+    pathToString,
+    findLinks
 } = require("./utils")
 
 const verifierCertificat = (graph, cycle) => {
@@ -25,11 +25,32 @@ const genereEtTeste = graph => {
     })
 }
 
-parser("./chno.txt")
-    .then(graph => {
-        CHOtoCHNO(graph)
-        //console.log(graph)
-        genereEtTeste(graph)
-    }).catch(err => {
-        console.log(err)
-    })
+const solvBackTracking = graph => {
+	for(let i of graph.points){
+        console.log(i)
+		let cycle = findLinks(graph, i, graph.points.length);
+		if(verifierCertificat(graph, cycle)){
+			console.log(`La suite ${pathToString(cycle)} a reussi.`);
+			return cycle
+		}
+    }
+    console.log("not found")
+	return false
+};
+
+const oneCycle = graph => {
+    const cycles = allSubsets(graph.points)
+    for(let i = 0; i < cycles.length; i++){
+        if(verifierCertificat(graph, cycles[i])){
+            return true
+        }
+    }
+    return false
+}
+
+module.exports = {
+    verifierCertificat,
+    genereEtTeste,
+    solvBackTracking,
+    oneCycle
+}
