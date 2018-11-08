@@ -17,17 +17,21 @@ const verifierCertificat = (graph, cycle) => {
     return isSubset(reduceCycle(cycle), graph.links)
 }
 
-const genereEtTeste = graph => {
+const genereEtTeste = (graph, silent) => {
     const cycles = allSubsets(graph.points)
+    var list = []
     cycles.forEach(e => {
         let res = verifierCertificat(graph, e)
-        console.log(e, res)
+        if(!silent){
+            console.log(e, res)
+        }
+        else list.push(res)
     })
+    if(silent) return list
 }
 
 const solvBackTracking = graph => {
 	for(let i of graph.points){
-        console.log(i)
 		let cycle = findLinks(graph, i, graph.points.length);
 		if(verifierCertificat(graph, cycle)){
 			console.log(`La suite ${pathToString(cycle)} a reussi.`);

@@ -61,12 +61,11 @@ const allSubsets = arr => allCharSeqs(arr.length, arr)
 
 const pathToString = path => path.reduce((m, n) => m + " -> " + n)
 
-const findLinks = (graph, point, limit) => {
-    if (limit > 0) {
+const findLinks = (graph, point, len) => {
+    if (len > 0) {
         var paths = filter(graph.links, e => e[0] === point)
         for (let i of paths) {
-            console.log(i)
-            return [point, ...findLinks(graph, i[1], limit - 1)]
+            return [point, ...findLinks(graph, i[1], len - 1)]
         }
     }
     return [];
