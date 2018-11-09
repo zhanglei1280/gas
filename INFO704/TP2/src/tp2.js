@@ -52,6 +52,18 @@ const oneCycle = graph => {
     return false
 }
 
+const allCycles = graph => {
+    var list = []
+    const cycles = allSubsets(graph.points)
+    cycles.forEach(e => {
+        let res = verifierCertificat(graph, e)
+        if(res){
+            list.push(e)
+        }
+    })
+    return list
+}
+
 module.exports = {
     verifierCertificat,
     genereEtTeste,
