@@ -15,7 +15,7 @@ Cette etape est optionnelle lorsque les dependencies sont fournies dans la reper
 ### Usage
 
 ```bash
-$ node index.js path_de_graphe mode
+$ node chno.js path_de_graphe mode
 ```
 
 - path_de_graphe : le path de fichier graphe textuelle:
@@ -34,3 +34,15 @@ Lancer q2 avec chno_vrai_1.txt
 ```bash
 $ node index.js instances/chno_vrai_1.txt q2
 ```
+
+#### shortcut
+```bash
+$ npm run q2
+$ npm run q3
+```
+
+### test unitaire et timer
+```bash
+$ npm test
+```
+

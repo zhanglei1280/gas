@@ -40,7 +40,7 @@ const reduceCycle = cycle => {
 /**
  * Obtenir tous sous-liste d'une liste
  * Modified from
- * source: lhttps://stackoverflow.com/questions/42583892/how-to-get-all-possible-combinations-of-elements-in-an-array-including-order-and
+ * source: https://stackoverflow.com/questions/42583892/how-to-get-all-possible-combinations-of-elements-in-an-array-including-order-and
  * @param {Array} arr 
  */
 const flatten = arrays => [].concat.apply([], arrays);
