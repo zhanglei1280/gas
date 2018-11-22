@@ -7,7 +7,8 @@
     "start": "node chno.js",
     "test": "mocha test/*.test.js -s 0",
     "q2": "node chno.js ./instances/chno_vrai_1.txt q2",
-    "q3": "node chno.js ./instances/chno_vrai_1.txt q3"
+    "q3": "node chno.js ./instances/chno_vrai_1.txt q3",
+    "sat": "node sat.js ./instances/3SAT_vrai.txt"
   },
   "author": "",
   "license": "ISC",
