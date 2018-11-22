@@ -4,13 +4,11 @@
 
 ### Node.js version 8+
 
-### Installation de dependency (optionnelle)
+### Installation de dependency
 
 ```bash
 $ npm i
 ```
-
-Cette etape est optionnelle lorsque les dependencies sont fournies dans la repertoire `node_modules`.
 
 ### Usage
 

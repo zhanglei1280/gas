@@ -11,8 +11,8 @@ const isCHNO = graph => {
     return oneCycle(graph)
 }
 
-const readGraph = path => new Promise((resolve, reject) => {
-    fs.readFile(path, (err, data) => {
+const readGraph = pathFile => new Promise((resolve, reject) => {
+    fs.readFile(pathFile, (err, data) => {
         if(err) reject(err)
         else resolve(data.toString())
     })
