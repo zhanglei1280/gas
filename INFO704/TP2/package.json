@@ -5,7 +5,7 @@
   "main": "chno.js",
   "scripts": {
     "start": "node chno.js",
-    "test": "mocha test/tp2.test.js -s 0",
+    "test": "mocha test/*.test.js -s 0",
     "q2": "node chno.js ./instances/chno_vrai_1.txt q2",
     "q3": "node chno.js ./instances/chno_vrai_1.txt q3"
   },

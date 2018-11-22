@@ -31,7 +31,6 @@ const verify3SAT = sat => {
         nbClause,
         clauses
     } = sat
-    console.log(countVar(sat))
 
     return (
         nbVar == countVar(sat) &&

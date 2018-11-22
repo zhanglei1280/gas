@@ -17,11 +17,11 @@ parser(graphPath)
         switch(mode){
             case "q2":
                 genereEtTeste(graph)
-                break;
+                break
             case "q3":
                 solvBackTracking(graph)
             default:
-                break;
+                break
         }
     }).catch(err => {
         console.log(err)
