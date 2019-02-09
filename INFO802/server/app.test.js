@@ -14,7 +14,7 @@ describe('class Coordinate', () => {
 
 describe('soap getDistance()', () => {
   it("should get distance", done => {
-    const url = "http://localhost:20191/Distance?wsdl"
+    const url = "http://localhost:9000/Distance?wsdl"
     const args = {
         x1: 1.2342,
         y1: 4.564,
