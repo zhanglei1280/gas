@@ -21,6 +21,7 @@
     "babel-register": "^6.26.0",
     "bulma": "^0.7.2",
     "expect": "^23.6.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "react-router-dom": "^4.3.1"
   }
 }
