@@ -2,15 +2,33 @@ import React, { Component } from 'react'
 import Coordinate from "./Coordinate"
 import Result from "./Result"
 import sncf from "./sncf"
+import {withRouter} from "react-router-dom"
+import Datepicker from "./Datepicker"
+import superagent from "superagent"
+import Picker from "react-date-picker"
+
+const key = "5cae67db-8c5c-4269-a2b3-935cf2c4656a"
 
 class App extends Component{
     state = {
-        source: "chambery",
-        dest: "lyon",
-        results: [],
+        source: "",
+        dest: "",
+        results: [], 
         errSource: false,
-        errDest: false
+        errDest: false,
+        time: new Date()
     }
+
+    componentDidMount = () => {
+        const {pathname} = this.props.location
+        const paths = pathname.split(/ *\/ */)
+        const source = paths[1]
+        const dest = paths[2]
+        if(source) this.setState(() => ({source}))
+        if(dest) this.setState(() => ({dest}))
+    }
+
+    onChangeDate = time => this.setState({ time })
 
     onFrom = e => {
         const source = e.target.value
@@ -28,7 +46,7 @@ class App extends Component{
             source: "",
             dest: "",
             errSource: false,
-            errDest: true
+            errDest: false
         }))
     }
 
@@ -42,33 +60,49 @@ class App extends Component{
             this.setState(() => ({errDest: true}))
         }
         else{
-            let p1 = sncf(source)
-            let p2 = sncf(dest)
-            Promise.all([p1, p2])
-                .then(res => {
-                    if(res[0].length == 2 & res[1].length == 2){
-                        let p1 = new Coordinate(res[0][1], res[0][0])
-                        let p2 = new Coordinate(res[1][1], res[1][0])
-                        let distance = p1.distance(p2)
-                        let price = distance / 9.8 * 2
-                        console.log(p1.x, p2.x,p1.distance(p2))
-                        this.setState(prev => ({
-                            results: prev.results.concat({
-                                source, dest, distance, price
-                            })
-                        }))
-                    }
-                    else{
-                        if(res[0].length != 2){
-                            this.setState(() => ({errSource: true}))
-                        }
-                        if(res[1].length != 2){
-                            this.setState(() => ({errDest: true}))
-                        }
-                    }
+            // let p1 = sncf(source)
+            // let p2 = sncf(dest)
+            // Promise.all([p1, p2])
+            //     .then(res => {
+            //         if(res[0].length === 2 & res[1].length === 2){
+            //             let p1 = new Coordinate(res[0][1], res[0][0])
+            //             let p2 = new Coordinate(res[1][1], res[1][0])
+            //             let distance = p1.distance(p2)
+            //             let price = distance / 9.8 * 2
+            //             console.log(p1.x, p2.x,p1.distance(p2))
+            //             this.setState(prev => ({
+            //                 results: prev.results.concat({
+            //                     source, dest, distance, price
+            //                 })
+            //             }))
+            //         }
+            //         else{
+            //             if(res[0].length !== 2){
+            //                 this.setState(() => ({errSource: true}))
+            //             }
+            //             if(res[1].length !== 2){
+            //                 this.setState(() => ({errDest: true}))
+            //             }
+            //         }
+            //     })
+            //     .catch(err => {
+            //         console.log(err)
+            //     })
+
+
+            const {source, dest, time} = this.state
+
+            superagent
+                .post("http://localhost:20191/journey")
+                .send({
+                    source,
+                    dest
                 })
-                .catch(err => {
-                    console.log(err)
+                .end((err, res) => {
+                    if(err) console.log(err)
+                    else{
+                        console.log(res.body)
+                    }
                 })
         }
     }
@@ -136,6 +170,12 @@ class App extends Component{
             }
             </div>
           </div>
+
+          <div className="field">
+          <div className="picker">
+            <Picker onChange={this.onChangeDate} value={this.state.time} />
+        </div>
+          </div>
           
           
           <div className="field is-grouped">
@@ -160,4 +200,4 @@ class App extends Component{
     }
 }
 
-export default App
+export default withRouter(App)

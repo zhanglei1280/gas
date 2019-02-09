@@ -4,13 +4,14 @@ import "bulma/bulma.sass"
 import "@fortawesome/fontawesome-free/css/all.css"
 import './index.css';
 import App from './App';
+import AppRouter from "./AppRouter"
 import Nav from "./Nav"
 import * as serviceWorker from './serviceWorker';
 
 const jsx = (
     <div>
     <Nav />
-    <App />
+    <AppRouter />
     </div>
 )
 

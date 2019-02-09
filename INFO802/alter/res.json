@@ -1,0 +1,296 @@
+[{
+    "type": "journey",
+    "id": "2019-02-09T19:14_FRLPD_17637_2019-02-09T20:38_FRGNB",
+    "legs": [{
+        "origin": "FRLPD",
+        "destination": "FRGNB",
+        "departure": "2019-02-09T18:14:00.000Z",
+        "arrival": "2019-02-09T19:38:00.000Z",
+        "line": {
+            "type": "line",
+            "id": "17637",
+            "name": "TER 17637",
+            "mode": "train",
+            "vehicleType": "TER",
+            "services": ["VELO_GRATUIT"],
+            "operator": "SN"
+        },
+        "operator": "SN",
+        "schedule": "2019-02-09t18-14-00-000z-2019-02-09t19-38-00-000z"
+    }],
+    "price": {
+        "amount": 23.2,
+        "currency": "EUR",
+        "fares": [{
+            "price": {
+                "amount": 23.2,
+                "currency": "EUR"
+            },
+            "model": "NOFLEX",
+            "appliedDiscount": 0,
+            "passengers": [{
+                "passengerId": "0",
+                "price": 23.2,
+                "quotations": [{
+                    "segmentId": 2,
+                    "fareInformationId": 734678414,
+                    "cosLevel": "d8ce1b9a-8970-41ab-9ca8-38f6540be5e3-1",
+                    "passengerType": "ADT",
+                    "classOfService": "B ",
+                    "remainingSeat": 99,
+                    "cuiQuotation": false
+                }],
+                "age": "ADULT",
+                "fidelityCard": "NONE",
+                "fidelityPoints": null,
+                "promoCodeType": null,
+                "encartedPrems": false,
+                "specificSeatRequired": true,
+                "hanInformation": null,
+                "travelerId": null,
+                "promoCodeApplied": false
+            }],
+            "animals": [],
+            "bookingFee": null,
+            "bicycle": false,
+            "placementOptions": false
+        }]
+    },
+    "isRealTime": false
+}, {
+    "type": "journey",
+    "id": "2019-02-09T20:14_FRLPD_17641_2019-02-09T21:38_FRGNB",
+    "legs": [{
+        "origin": "FRLPD",
+        "destination": "FRGNB",
+        "departure": "2019-02-09T19:14:00.000Z",
+        "arrival": "2019-02-09T20:38:00.000Z",
+        "line": {
+            "type": "line",
+            "id": "17641",
+            "name": "TER 17641",
+            "mode": "train",
+            "vehicleType": "TER",
+            "services": ["VELO_GRATUIT"],
+            "operator": "SN"
+        },
+        "operator": "SN",
+        "schedule": "2019-02-09t19-14-00-000z-2019-02-09t20-38-00-000z"
+    }],
+    "price": {
+        "amount": 23.2,
+        "currency": "EUR",
+        "fares": [{
+            "price": {
+                "amount": 23.2,
+                "currency": "EUR"
+            },
+            "model": "NOFLEX",
+            "appliedDiscount": 0,
+            "passengers": [{
+                "passengerId": "0",
+                "price": 23.2,
+                "quotations": [{
+                    "segmentId": 3,
+                    "fareInformationId": 734678414,
+                    "cosLevel": "d8ce1b9a-8970-41ab-9ca8-38f6540be5e3-5",
+                    "passengerType": "ADT",
+                    "classOfService": "B ",
+                    "remainingSeat": 99,
+                    "cuiQuotation": false
+                }],
+                "age": "ADULT",
+                "fidelityCard": "NONE",
+                "fidelityPoints": null,
+                "promoCodeType": null,
+                "encartedPrems": false,
+                "specificSeatRequired": true,
+                "hanInformation": null,
+                "travelerId": null,
+                "promoCodeApplied": false
+            }],
+            "animals": [],
+            "bookingFee": null,
+            "bicycle": false,
+            "placementOptions": false
+        }]
+    },
+    "isRealTime": false
+}, {
+    "type": "journey",
+    "id": "2019-02-09T21:14_FRLPD_17643_2019-02-09T22:38_FRGNB",
+    "legs": [{
+        "origin": "FRLPD",
+        "destination": "FRGNB",
+        "departure": "2019-02-09T20:14:00.000Z",
+        "arrival": "2019-02-09T21:38:00.000Z",
+        "line": {
+            "type": "line",
+            "id": "17643",
+            "name": "TER 17643",
+            "mode": "train",
+            "vehicleType": "TER",
+            "services": ["VELO_GRATUIT"],
+            "operator": "SN"
+        },
+        "operator": "SN",
+        "schedule": "2019-02-09t20-14-00-000z-2019-02-09t21-38-00-000z"
+    }],
+    "price": {
+        "amount": 23.2,
+        "currency": "EUR",
+        "fares": [{
+            "price": {
+                "amount": 23.2,
+                "currency": "EUR"
+            },
+            "model": "NOFLEX",
+            "appliedDiscount": 0,
+            "passengers": [{
+                "passengerId": "0",
+                "price": 23.2,
+                "quotations": [{
+                    "segmentId": 6,
+                    "fareInformationId": 734678414,
+                    "cosLevel": "d8ce1b9a-8970-41ab-9ca8-38f6540be5e3-3",
+                    "passengerType": "ADT",
+                    "classOfService": "B ",
+                    "remainingSeat": 99,
+                    "cuiQuotation": false
+                }],
+                "age": "ADULT",
+                "fidelityCard": "NONE",
+                "fidelityPoints": null,
+                "promoCodeType": null,
+                "encartedPrems": false,
+                "specificSeatRequired": true,
+                "hanInformation": null,
+                "travelerId": null,
+                "promoCodeApplied": false
+            }],
+            "animals": [],
+            "bookingFee": null,
+            "bicycle": false,
+            "placementOptions": false
+        }]
+    },
+    "isRealTime": false
+}, {
+    "type": "journey",
+    "id": "2019-02-09T22:06_FRUQQ_39549_2019-02-10T00:05_FRGNR",
+    "legs": [{
+        "origin": "FRUQQ",
+        "destination": "FRGNR",
+        "departure": "2019-02-09T21:06:00.000Z",
+        "arrival": "2019-02-09T23:05:00.000Z",
+        "line": {
+            "type": "line",
+            "id": "39549",
+            "name": "Autocar 39549",
+            "mode": "train",
+            "vehicleType": "CAR",
+            "services": [],
+            "operator": "SN"
+        },
+        "operator": "SN",
+        "schedule": "2019-02-09t21-06-00-000z-2019-02-09t23-05-00-000z"
+    }],
+    "price": {
+        "amount": 23.2,
+        "currency": "EUR",
+        "fares": [{
+            "price": {
+                "amount": 23.2,
+                "currency": "EUR"
+            },
+            "model": "NOFLEX",
+            "appliedDiscount": 0,
+            "passengers": [{
+                "passengerId": "0",
+                "price": 23.2,
+                "quotations": [{
+                    "segmentId": 7,
+                    "fareInformationId": 734678414,
+                    "cosLevel": "d8ce1b9a-8970-41ab-9ca8-38f6540be5e3-6",
+                    "passengerType": "ADT",
+                    "classOfService": "B ",
+                    "remainingSeat": 99,
+                    "cuiQuotation": false
+                }],
+                "age": "ADULT",
+                "fidelityCard": "NONE",
+                "fidelityPoints": null,
+                "promoCodeType": null,
+                "encartedPrems": false,
+                "specificSeatRequired": true,
+                "hanInformation": null,
+                "travelerId": null,
+                "promoCodeApplied": false
+            }],
+            "animals": [],
+            "bookingFee": null,
+            "bicycle": false,
+            "placementOptions": false
+        }]
+    },
+    "isRealTime": false
+}, {
+    "type": "journey",
+    "id": "2019-02-09T23:14_FRUQQ_39551_2019-02-10T01:10_FRGNR",
+    "legs": [{
+        "origin": "FRUQQ",
+        "destination": "FRGNR",
+        "departure": "2019-02-09T22:14:00.000Z",
+        "arrival": "2019-02-10T00:10:00.000Z",
+        "line": {
+            "type": "line",
+            "id": "39551",
+            "name": "Autocar 39551",
+            "mode": "train",
+            "vehicleType": "CAR",
+            "services": [],
+            "operator": "SN"
+        },
+        "operator": "SN",
+        "schedule": "2019-02-09t22-14-00-000z-2019-02-10t00-10-00-000z"
+    }],
+    "price": {
+        "amount": 23.2,
+        "currency": "EUR",
+        "fares": [{
+            "price": {
+                "amount": 23.2,
+                "currency": "EUR"
+            },
+            "model": "NOFLEX",
+            "appliedDiscount": 0,
+            "passengers": [{
+                "passengerId": "0",
+                "price": 23.2,
+                "quotations": [{
+                    "segmentId": 2,
+                    "fareInformationId": 1870024434,
+                    "cosLevel": "da6df7a7-9e46-4096-8b3e-fddb3d119abc-6",
+                    "passengerType": "ADT",
+                    "classOfService": "B ",
+                    "remainingSeat": 99,
+                    "cuiQuotation": false
+                }],
+                "age": "ADULT",
+                "fidelityCard": "NONE",
+                "fidelityPoints": null,
+                "promoCodeType": null,
+                "encartedPrems": false,
+                "specificSeatRequired": true,
+                "hanInformation": null,
+                "travelerId": null,
+                "promoCodeApplied": false
+            }],
+            "animals": [],
+            "bookingFee": null,
+            "bicycle": false,
+            "placementOptions": false
+        }]
+    },
+    "isRealTime": false
+}]

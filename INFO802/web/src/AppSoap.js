@@ -11,12 +11,12 @@ class App extends Component {
 
   componentDidMount = () => {
     const url = "http://localhost:9000/Distance?wsdl"
-    const args = {
-        x1: 1.2342,
-        y1: 4.564,
-        x2: 5.2354,
-        y2: 9.345
-    }
+    // const args = {
+    //     x1: 1.2342,
+    //     y1: 4.564,
+    //     x2: 5.2354,
+    //     y2: 9.345
+    // }
 
     soap.createClientAsync(url)
         .then(client => {
