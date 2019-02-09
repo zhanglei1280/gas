@@ -11,8 +11,8 @@ app.use(bodyParser.json())
 app.post("/journey", (req, res) => {
     const {source, dest, time, till} = req.body
     const date = new Date(time)
-    console.log(source, dest)
-    search(source, dest)
+    console.log(source, dest, time, date)
+    search(source, dest, date)
         .then(data => {
             res.send(data)
         })

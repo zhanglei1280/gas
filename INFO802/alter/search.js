@@ -1,8 +1,6 @@
 const {stations, journeys} = require("sncf")
 
-const day = 24*60*60*1000
-
-const search = (source, dest, now = (new Date()), till = day) => {
+const search = (source, dest, now = (new Date()), till = 24*60*60*1000) => {
     let s1 = stations(source)
     let s2 = stations(dest)
     return Promise.all([s1, s2])

@@ -16,7 +16,9 @@ class App extends Component{
         results: [], 
         errSource: false,
         errDest: false,
-        time: new Date()
+        time: new Date(),
+        loading: false,
+        distance: 0
     }
 
     componentDidMount = () => {
@@ -52,6 +54,9 @@ class App extends Component{
 
     onSubmit = e => {
         e.preventDefault()
+        this.setState(() => ({
+            loading: true
+        }))
         const {source, dest} = this.state
         if(!source.length){
             this.setState(() => ({errSource: true}))
@@ -60,50 +65,55 @@ class App extends Component{
             this.setState(() => ({errDest: true}))
         }
         else{
-            // let p1 = sncf(source)
-            // let p2 = sncf(dest)
-            // Promise.all([p1, p2])
-            //     .then(res => {
-            //         if(res[0].length === 2 & res[1].length === 2){
-            //             let p1 = new Coordinate(res[0][1], res[0][0])
-            //             let p2 = new Coordinate(res[1][1], res[1][0])
-            //             let distance = p1.distance(p2)
-            //             let price = distance / 9.8 * 2
-            //             console.log(p1.x, p2.x,p1.distance(p2))
-            //             this.setState(prev => ({
-            //                 results: prev.results.concat({
-            //                     source, dest, distance, price
-            //                 })
-            //             }))
-            //         }
-            //         else{
-            //             if(res[0].length !== 2){
-            //                 this.setState(() => ({errSource: true}))
-            //             }
-            //             if(res[1].length !== 2){
-            //                 this.setState(() => ({errDest: true}))
-            //             }
-            //         }
-            //     })
-            //     .catch(err => {
-            //         console.log(err)
-            //     })
-
-
-            const {source, dest, time} = this.state
-
-            superagent
-                .post("http://localhost:20191/journey")
-                .send({
-                    source,
-                    dest
-                })
-                .end((err, res) => {
-                    if(err) console.log(err)
-                    else{
-                        console.log(res.body)
+            let p1 = sncf(source)
+            let p2 = sncf(dest)
+            Promise.all([p1, p2])
+                .then(res => {
+                    if(res[0].length === 2 & res[1].length === 2){
+                        let p1 = new Coordinate(res[0][1], res[0][0])
+                        let p2 = new Coordinate(res[1][1], res[1][0])
+                        let distance = p1.distance(p2)
+                        let price = distance / 9.8 * 2
+                        console.log(p1.x, p2.x,p1.distance(p2))
+                        this.setState(() => ({
+                            distance
+                        }))
                     }
-                })
+                    else{
+                        if(res[0].length !== 2){
+                            this.setState(() => ({errSource: true}))
+                        }
+                        if(res[1].length !== 2){
+                            this.setState(() => ({errDest: true}))
+                        }
+                    }
+                    const {source, dest, time} = this.state
+
+                    superagent
+                        .post("http://localhost:20191/journey")
+                        .send({
+                            source,
+                            dest,
+                            time
+                        })
+                        .end((err, res) => {
+                            if(err) console.log(err)
+                            else{
+                                console.log(res.body)
+                                this.setState(() => ({
+                                    results: res.body
+                                }))
+                            }
+                            this.setState(() => ({
+                                loading: false
+                            }))
+                        })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+
+
         }
     }
 
@@ -180,7 +190,17 @@ class App extends Component{
           
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-link" onClick={this.onSubmit}>Submit</button>
+              <button className={
+                  this.state.loading
+                  ? "button is-link is-loading"
+                  : "button is-link"
+              } onClick={
+                  this.state.loading
+                  ? e => {e.preventDefault()}
+                  : this.onSubmit
+              }
+              disabled={this.state.loading}
+              >Submit</button>
             </div>
             <div className="control">
               <button className="button is-text" onClick={this.onCancel}>Cancel</button>
@@ -189,9 +209,21 @@ class App extends Component{
             
           <div>
           {
-              this.state.results.map((e, i) => (
-                  <Result key={i}>{e}</Result>
-              ))
+              this.state.results.map((e, i) => {
+
+                const {source, dest, distance} = this.state
+                 return( 
+                     <Result key={i}>{
+                      {
+                          source,
+                          dest,
+                          distance,
+                          price: e.price.amount,
+                          legs: e.legs
+                      }
+                  }</Result>
+                  )
+              })
           }
           </div>
 
