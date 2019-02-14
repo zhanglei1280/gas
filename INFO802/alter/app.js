@@ -3,6 +3,9 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const Coordinate = require("./Coordinate")
 const search = require("./search")
+const path = require("path")
+
+const build = path.join(__dirname, "build")
 
 var app = express()
 app.use(cors())
@@ -35,6 +38,11 @@ app.get("/price/:distance", (req, res) => {
     res.send({
         price: distance / 9.8 * 2
     })
+})
+
+app.use(express.static(build))
+app.get("*", (req, res) => {
+    res.sendFile(path.join(build, "index.html"))
 })
 
 app.listen(20191)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import logo from "./logo.jpg"
 
 class Nav extends Component{
 
@@ -7,7 +8,7 @@ class Nav extends Component{
         <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
         <a className="navbar-item" href="#">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+          <img src={logo} width="112" height="28" />
         </a>
     
         <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

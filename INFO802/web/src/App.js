@@ -78,6 +78,7 @@ class App extends Component{
                         this.setState(() => ({
                             distance
                         }))
+                        this.props.history.push(`/${source}/${dest}`)
                     }
                     else{
                         if(res[0].length !== 2){
@@ -87,10 +88,10 @@ class App extends Component{
                             this.setState(() => ({errDest: true}))
                         }
                     }
-                    const {source, dest, time} = this.state
+                    const {time} = this.state
 
                     superagent
-                        .post("http://localhost:20191/journey")
+                        .post("http://train.yinyan.fr/journey")
                         .send({
                             source,
                             dest,
@@ -206,10 +207,19 @@ class App extends Component{
               <button className="button is-text" onClick={this.onCancel}>Cancel</button>
             </div>
           </div>
+          <div>
+            {
+                this.state.distance > 0
+                ? `Distance : ${this.state.distance}`
+                : ""
+            }
+          </div>
             
           <div>
           {
-              this.state.results.map((e, i) => {
+            this.state.results
+            && !!(this.state.results.length ) 
+            && this.state.results.map((e, i) => {
 
                 const {source, dest, distance} = this.state
                  return( 

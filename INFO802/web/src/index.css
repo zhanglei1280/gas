@@ -26,3 +26,6 @@ code {
   margin-bottom: 20px;
 }
 
+.no-margin-bottom {
+  margin-bottom: 0
+}

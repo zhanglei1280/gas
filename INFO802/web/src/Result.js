@@ -24,15 +24,30 @@ class Result extends Component{
                     <div className="content">
                         {
                             legs.map((e, i) => (
-                                <div key={i}>{
-                                    moment(e.departure).format('MMMM Do YYYY, h:mm:ss a')
-                                }</div>
+                                <div key={i}>
+                                <nav className="level is-mobile">
+                                    <div className="level-left">
+                                        <div className="level-item">
+                                        <h1>
+                                        {
+                                            moment(e.departure).format("HH:mm")
+                                        }
+                                        </h1>
+                                        </div>
+                                    </div>
+
+                                    <div className="level-right">
+                                        <div className="level-item">
+                                            <h1>{price} €</h1>
+                                        </div>
+                                    </div>
+                                
+                                </nav>
+                            </div>
+                                
+
                             ))
                         }
-                        <br />
-                        Distance: {distance},
-                        <br />
-                        Price: {price}
                     </div>
                 </div>
                 <footer className="card-footer">
