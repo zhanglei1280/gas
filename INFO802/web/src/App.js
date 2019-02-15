@@ -228,7 +228,7 @@ class App extends Component{
                           source,
                           dest,
                           distance,
-                          price: e.price.amount,
+                          price: (e.price ? e.price.amount : "N/A"),
                           legs: e.legs
                       }
                   }</Result>
