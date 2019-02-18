@@ -20,11 +20,19 @@ public class Main
 		System.out.print("Saisissez votre numero de carte: ");
 		noCarte = br.readLine();
 
+		while(unauthorised(noCarte)){
+            System.out.println("Cette carte n'existe pas. ");
+            System.out.print("Saisissez votre numero de carte: ");
+            noCarte = br.readLine();
+        }
+
 		distributeurCA.insererCarte(
 				noCarte,
 				"1111",
 				3
 		);
+
+
 
 		String choix;
 
@@ -37,6 +45,11 @@ public class Main
 		}
 	
 	}
+
+	public static boolean unauthorised(String noCarte){
+	    Client exist = Seed.getClientMap().get(noCarte);
+	    return exist == null;
+    }
 	
 	
 	public static void traiterChoix(String choix) throws IOException
@@ -117,6 +130,12 @@ public class Main
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Saisissez votre numero de carte: ");
             noCarte = br.readLine();
+
+            while(unauthorised(noCarte)){
+                System.out.println("Cette carte n'existe pas. ");
+                System.out.print("Saisissez votre numero de carte: ");
+                noCarte = br.readLine();
+            }
 
             distributeurCA.insererCarte(
                     noCarte,
