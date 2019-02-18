@@ -4,8 +4,8 @@ import java.util.List;
 public class Client 
 {
 	private String name;
-	private List<Compte> listCompte = new ArrayList<Compte>();
-	private List<Compte> listCompteVirement = new ArrayList<Compte>();
+	private ArrayList<Compte> listCompte = new ArrayList<Compte>();
+	private ArrayList<Compte> listCompteVirement = new ArrayList<Compte>();
 
 	public void addCompte(Compte compte){
 		listCompte.add(compte);
@@ -15,11 +15,11 @@ public class Client
 		listCompteVirement.add(compte);
 	}
 
-	public List<Compte> recupereComptes() {
+	public ArrayList<Compte> recupereComptes() {
 		return listCompte;
 	}
 
-	public List<Compte> recupereComptesVirement() {
+	public ArrayList<Compte> recupereComptesVirement() {
 		return listCompteVirement;
 	}
 
@@ -28,17 +28,6 @@ public class Client
 		return this;
 	}
 
-	List<Compte> getListCompte() {
-		// Automatically generated method. Please delete this comment before entering
-		// specific code.
-		return this.listCompte;
-	}
-
-	void setListCompte(List<Compte> value) {
-		// Automatically generated method. Please delete this comment before entering
-		// specific code.
-		this.listCompte = value;
-	}
 
 	public Client(String name) {
 		this.name = name;

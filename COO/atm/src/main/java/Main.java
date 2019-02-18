@@ -14,10 +14,6 @@ public class Main
 	private static String noCarte;
 	private static boolean fini = false;
 
-	public static void seed(){
-
-	}
-
 	public static void main(String[] args) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -48,6 +44,25 @@ public class Main
 		if(choix.equals("1"))
 		{
 			System.out.println("1. retrait");
+			distributeurCA.retirer();
+			distributeurCA.afficheListeComptes();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Choisissez un compte: ");
+			String choixCompte;
+			choixCompte = br.readLine();
+			Compte compte = distributeurCA.choisirCompte(Integer.parseInt(choixCompte));
+
+
+			System.out.println("Saisissez le montant: ");
+			String montant = br.readLine();
+
+			boolean retrait = distributeurCA.infoRetrait(compte, Float.parseFloat(montant));
+			if(retrait){
+				System.out.println("Retrait Succes, votre solde est "+ compte.getSolde());
+			}else{
+				System.out.println("Retrait impossible, solde insuffissante ou platfond attienté.");
+			}
 		}
 		else if(choix.equals("2"))
 		{
@@ -56,11 +71,11 @@ public class Main
 			
 			distributeurCA.afficheListeComptes();
 			
-			System.out.println("Choisissez votre compte: ");
+			System.out.println("Choisissez un compte: ");
 			String choixCompte;
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));  
 			choixCompte = br.readLine();
-			distributeurCA.afficheCompte(distributeurCA.choisirCompte(Integer.parseInt(choixCompte)));
+			distributeurCA.afficheCompteInfo(distributeurCA.choisirCompte(Integer.parseInt(choixCompte)));
 		}
 		else if(choix.equals("3"))
 		{
@@ -72,19 +87,19 @@ public class Main
 			String choixCompte;
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			choixCompte = br.readLine();
-			Compte compteSource = distributeurCA.getListeComptes().get(Integer.parseInt(choixCompte));
+			Compte compteSource = distributeurCA.choisirCompte(Integer.parseInt(choixCompte));
 
 			distributeurCA.afficheListeCompteDestinataire();
 			System.out.println("Choisissez votre compte destinaire: ");
 			String choixCompteDest;
 			choixCompteDest = br.readLine();
-			Compte compteDest = distributeurCA.getListeComptesDestinaire().get(Integer.parseInt(choixCompte));
+			Compte compteDest = distributeurCA.choisirCompteDestinataire(Integer.parseInt(choixCompteDest));
 
 
 			System.out.println("Saisissez le montant: ");
 			String montant = br.readLine();
 
-			Boolean vire = distributeurCA.selectionneInformationsVirement(
+			boolean vire = distributeurCA.selectionneInformationsVirement(
 					compteSource,
 					compteDest,
 					Float.parseFloat(montant),
@@ -98,6 +113,17 @@ public class Main
 				System.out.println("Virement error");
 			}
 		}
+		else if(choix.equals("4")){
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Saisissez votre numero de carte: ");
+            noCarte = br.readLine();
+
+            distributeurCA.insererCarte(
+                    noCarte,
+                    "1111",
+                    3
+            );
+        }
 		else
 		{
 			System.out.println("Bye bye ");
@@ -109,9 +135,10 @@ public class Main
 	public static void afficherMenu()
 	{
 		System.out.println("----------- Welcome to our bank---------------");
-		System.out.println("1. Retirer de l'a");
+		System.out.println("1. Retrait");
 		System.out.println("2. Consulster votre compte");
-		System.out.println("3. virement");
+		System.out.println("3. Virement");
+        System.out.println("4. Recuperer votre carte.");
 		System.out.println("Entrer other numbers to exit.");
 	}
 }

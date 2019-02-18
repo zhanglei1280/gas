@@ -1,6 +1,6 @@
 
 import java.util.Date;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Distributeur 
 {
@@ -10,8 +10,8 @@ public class Distributeur
 	private int nbBillets100;
 	public Banque BanqueDeRattachement;
 	private Carte carteInseree;
-	private List<Compte> listeComptes;
-	private List<Compte> listeComptesDestinaire;
+	private ArrayList<Compte> listeComptes;
+	private ArrayList<Compte> listeComptesDestinaire;
 	
 	public Distributeur(Banque BanqueDeRattachement) 
 	{
@@ -50,24 +50,45 @@ public class Distributeur
 		this.carteInseree = value;
 	}
 	
-	public List<Compte> getListeComptes(){
+	public ArrayList<Compte> getListeComptes(){
 		return listeComptes;
 	}
-	public List<Compte> getListeComptesDestinaire(){
+	public ArrayList<Compte> getListeComptesDestinaire(){
 		return listeComptesDestinaire;
 	}
 
 	public void consultation()
 	{
-		listeComptes = BanqueDeRattachement.recupereComptesVirement(carteInseree.getNoCarte());
+		listeComptes = BanqueDeRattachement.recupereComptesConsultation(carteInseree.getNoCarte());
 	}
 
 	public void afficheListeComptes() {
-		listeComptes.forEach(this::afficheCompte);
+		int no = 0;
+		for(int i = 0; i < listeComptes.size(); i++){
+			no = i + 1;
+			System.out.println("Choix : " + no);
+			afficheCompte(listeComptes.get(i));
+		}
 	}
 
+	public void afficheListeComptesMore() {
+		int no = 0;
+		for(int i = 0; i < listeComptes.size(); i++){
+			no = i + 1;
+			System.out.println("Choix : " + no);
+			listeComptes.get(i).afficheCompte();
+		}
+	}
+
+
+
 	public void afficheListeCompteDestinataire(){
-		listeComptesDestinaire.forEach(this::afficheCompteVirement);
+		int no = 0;
+		for(int i = 0; i < listeComptesDestinaire.size(); i++){
+			no = i + 1;
+			System.out.println("Choix : " + no);
+			afficheCompteVirement(listeComptesDestinaire.get(i));
+		}
 	}
 
 	private void afficheCompteVirement(Compte compte) {
@@ -76,14 +97,20 @@ public class Distributeur
 
 	public Compte choisirCompte(int i) 
 	{
-		return listeComptes.get(i);
+		return listeComptes.get(i-1);
 	}
 
 	public Compte choisirCompteDestinataire(int i){
-		return listeComptesDestinaire.get(i);
+		return listeComptesDestinaire.get(i-1);
 	}
 
-	public void afficheCompte(Compte compte) 
+	public void afficheCompte(Compte compte)
+	{
+
+		System.out.println("noCompte : " + compte.getNoCompte());
+	}
+
+	public void afficheCompteInfo(Compte compte)
 	{
 		compte.afficheCompte();
 	}
@@ -99,7 +126,7 @@ public class Distributeur
 		listeComptesDestinaire = BanqueDeRattachement.recupereComptesVirement(carteInseree.getNoCarte());
 	}
 
-	public void afficheListeComptesVirement(List<Compte> comptesPerso, List<Compte> comptesDestinataires) {
+	public void afficheListeComptesVirement(ArrayList<Compte> comptesPerso, ArrayList<Compte> comptesDestinataires) {
 	}
 
 	public boolean selectionneInformationsVirement(Compte compteEmission, Compte compteDestinataire, float somme,
@@ -115,6 +142,13 @@ public class Distributeur
 
 	public void retirer(){
 		consultation();
+	}
+
+	public boolean infoRetrait(
+			Compte compte,
+			float somme
+	){
+		return BanqueDeRattachement.effectueRetrait(compte, somme);
 	}
 
 }

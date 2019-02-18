@@ -11,7 +11,15 @@ public class Compte {
 	private List<Operation> listOp = new ArrayList<Operation>();
 
 	public void afficheCompte() {
-		System.out.println("noCompte : " + noCompte + "\n" + "Solde : " + solde + "\n" + "plafondRetrait : " + "\n");
+		System.out.println("noCompte : " + noCompte + "\n" + "Solde : " + solde + "\n" + "plafondRetrait : " + plafondRetrait + "\n");
+	}
+
+	public float getSolde(){
+		return solde;
+	}
+
+	public String getNoCompte(){
+		return noCompte;
 	}
 
 	public Compte recupereCompte() {
@@ -34,7 +42,7 @@ public class Compte {
 
 	public boolean debiter(NatureOperation nature, float somme){
 		if(this.solde + somme < 0) return false;
-		solde += somme;
+		solde -= somme;
 		listOp.add(new Operation(nature, somme));
 		return true;
 	}

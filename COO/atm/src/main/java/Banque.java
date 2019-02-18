@@ -7,22 +7,22 @@ public class Banque
 {
 	private String nomBanque;
 	private String codeBanque;
-	public List<Banque> autresBanques = new ArrayList<Banque>();
-	private List<Client> listClient = new ArrayList<Client>();
-	private List<CarteClient> ListCarteClient = new ArrayList<CarteClient>();
-	private List<Compte> ListCompte = new ArrayList<Compte>();
+	public ArrayList<Banque> autresBanques = new ArrayList<Banque>();
+	private ArrayList<Client> listClient = new ArrayList<Client>();
+	private ArrayList<CarteClient> ListCarteClient = new ArrayList<CarteClient>();
+	private ArrayList<Compte> ListCompte = new ArrayList<Compte>();
 
 	public boolean estUnClient(String noCarte) {
 		return false;
 	}
 
-	private List<Compte> recupereComptes(String noCarte) 
+	private ArrayList<Compte> recupereComptes(String noCarte)
 	{
 		return ListCompte;
 		
 	}
 
-	public List<Compte> recupereComptesVirement(String noCarte){
+	public ArrayList<Compte> recupereComptesVirement(String noCarte){
 		CarteClient cc = new CarteClient(noCarte);
 		Client client = cc.recupereClient();
 		return client.recupereComptesVirement();
@@ -32,12 +32,12 @@ public class Banque
 			String message) 
 	{
 		return (
-				compteEmission.debiter(NatureOperation.Retrait, somme)
-				&& compteDestinataire.debiter(NatureOperation.Retrait, -somme)
+				compteEmission.debiter(NatureOperation.virement, somme)
+				&& compteDestinataire.debiter(NatureOperation.virement, -somme)
 				);
 	}
 
-	public List<Compte> recupereComptesConsultation(String noCarte) 
+	public ArrayList<Compte> recupereComptesConsultation(String noCarte)
 	{
 		CarteClient cc = new CarteClient(noCarte);
 		Client client = cc.recupereClient();
@@ -51,5 +51,12 @@ public class Banque
 	public Banque(String nomBanque, String codeBanque) {
 		this.nomBanque = nomBanque;
 		this.codeBanque = codeBanque;
+	}
+
+	public boolean effectueRetrait(
+			Compte compte,
+			float somme
+	){
+		return compte.debiter(NatureOperation.Retrait, somme);
 	}
 }
