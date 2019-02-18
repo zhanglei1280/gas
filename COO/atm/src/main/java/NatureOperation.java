@@ -1,0 +1,5 @@
+enum NatureOperation
+{
+    Retrait,
+    virement;
+}
