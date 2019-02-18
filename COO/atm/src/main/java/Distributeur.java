@@ -18,6 +18,7 @@ public class Distributeur
 		this.BanqueDeRattachement = BanqueDeRattachement;
     }
 
+
 	public void insererCarte(String noCarte, String code, int nbEssaisRestants) 
 	{
 		carteInseree = new Carte(noCarte, code, nbEssaisRestants);

@@ -41,7 +41,10 @@ public class Compte {
 	}
 
 	public boolean debiter(NatureOperation nature, float somme){
-		if(this.solde + somme < 0) return false;
+		if(solde - somme < 0) return false;
+		if(nature == NatureOperation.Retrait){
+            if(plafondRetrait - somme < 0) return false;
+        }
 		solde -= somme;
 		listOp.add(new Operation(nature, somme));
 		return true;
