@@ -17,7 +17,7 @@ float& Vecteur::operator [](int i){
 
 std::ostream& operator<<( std::ostream& out, Vecteur v )
 {
-    out << v[ 0 ] << " " << v[ 1 ] << " " << v[ 2 ];
+    out << v[ 0 ] << ", " << v[ 1 ] << ", " << v[ 2 ] << "; ";
     return out;
 }
 
@@ -25,6 +25,17 @@ std::istream& operator>>( std::istream& in, Vecteur& v )
 {
     in >> v[ 0 ] >> v[ 1 ] >> v[ 2 ];
     return in;
+}
+
+// 3.3 camera
+Vecteur Vecteur::inf( const Vecteur& other ) const{
+    Vecteur v (std::min(xyz[0], other[0]), std::min(xyz[1], other[1]), std::min(xyz[2], other[2]));
+    return v;
+}
+
+Vecteur Vecteur::sup( const Vecteur& other ) const{
+    Vecteur v (std::max(xyz[0], other[0]), std::max(xyz[1], other[1]), std::max(xyz[2], other[2]));
+    return v;
 }
 
 Triangle::Triangle(Vecteur a, Vecteur b, Vecteur c){
@@ -66,6 +77,19 @@ void TriangleSoup::read(std::istream& in){
     }
 }
 
+// 3.3 bounding box
+void TriangleSoup::boundingBox( Vecteur& low, Vecteur& up){
+    Vecteur first = triangles.front().edges[0];
+    low = up = first;
+
+    for(Triangle t : triangles){
+        for(Vecteur v : t.edges){
+            low = low.inf(v);
+            up = up.sup(v);
+        }
+    }
+}
+
 // draw
 void Vecteur::draw(){
     glVertex3f(xyz[0], xyz[1], xyz[2]);
@@ -84,18 +108,23 @@ void TriangleSoup::draw(){
 }
 
 // debug
-using namespace std;
-void Vecteur::log(){
-    int i;
-    for(i = 0; i < 3; i++){
-        cout << xyz[i] << ", ";
+std::ostream& operator<<( std::ostream& out, Triangle t ){
+    for(Vecteur v : t.edges){
+        out << v;
     }
-    cout << endl;
+    return out;
 }
 
-void Triangle::log(){
-    int i;
-    for(i = 0; i < 3; i++){
-        edges[i].log();
+//std::ostream& operator<<( std::ostream& out, TriangleSoup s ){
+//    for(Triangle t : s.triangles){
+//        out << t;
+//    }
+//    out << std::endl;
+//    return out;
+//}
+
+void TriangleSoup::log(){
+    for(Triangle t : triangles){
+        std::cout << t << std::endl;
     }
 }

@@ -7,13 +7,19 @@
 #include <iostream>
 #include <QGLViewer/qglviewer.h>
 
-
 struct Vecteur {
   float xyz[ 3 ]; // les composantes
   Vecteur() {}
   Vecteur( float x, float y, float z ); // constructeur
   float  operator[]( int i ) const;     // accesseur en lecture
   float& operator[]( int i );           // accesseur en ecriture
+
+  // Retourne le vecteur dont les composantes sont les minima des
+  // composantes de soi-même et de other.
+  Vecteur inf( const Vecteur& other ) const;
+  // Retourne le vecteur dont les composantes sont les maxima des
+  // composantes de soi-même et de other.
+  Vecteur sup( const Vecteur& other ) const;
 
   void log();
   void draw();
@@ -35,5 +41,7 @@ struct TriangleSoup {
   TriangleSoup() {}
   void push(Triangle t);
   void read( std::istream& in );
+  void log();
   void draw();
+  void boundingBox( Vecteur& low, Vecteur& up);
 };

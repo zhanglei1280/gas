@@ -36,6 +36,7 @@ void Viewer::draw()
 
   glBegin(GL_TRIANGLES);
   glColor4fv(colorBronzeDiff);
+  ptrSoup->log();
   ptrSoup->draw();
   glEnd();
 }
@@ -48,6 +49,17 @@ void Viewer::init()
 
   // Opens help window
   help();
+
+  // 3.3 camera
+  Vecteur low;
+  Vecteur up;
+  ptrSoup->boundingBox(low, up);
+  const qglviewer::Vec min (static_cast<qreal>(low[0]),static_cast<qreal>(low[1]), static_cast<qreal>(low[2]));
+  const qglviewer::Vec max (static_cast<qreal>(up[0]), static_cast<qreal>(up[1]), static_cast<qreal>(up[2]));
+
+  camera()->setSceneBoundingBox(min, max);
+// ou camera()->setSceneRadius( ... );
+  camera()->showEntireScene( );
 }
 
 QString Viewer::helpString() const
