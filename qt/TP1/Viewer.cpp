@@ -1,5 +1,6 @@
 /// \file Viewer.cpp
 #include "Viewer.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -11,24 +12,31 @@ void Viewer::draw()
   float colorGreenDiff [4] = { 0.0, 1.0, 0.0, 1.0 };
   float colorBlueDiff  [4] = { 0.0, 0.0, 1.0, 1.0 };
 
-  // Draws triangles given by 3 vertices.
+//  // Draws triangles given by 3 vertices.
+//  glBegin(GL_TRIANGLES);
+//  glColor4fv(colorBronzeDiff);
+//  glVertex3f( 0.0, 0.0, 0.0 );
+//  glVertex3f( 1.0, 0.0, 0.0 );
+//  glVertex3f( 0.0, 1.0, 0.0 );
+//  glColor4fv(colorRedDiff);
+//  glVertex3f( 1.0, 0.0, 0.0 );
+//  glVertex3f( 0.0, 1.0, 0.0 );
+//  glVertex3f( 0.0, 0.0, 1.0 );
+//  glColor4fv(colorGreenDiff);
+//  glVertex3f( 0.0, 0.0, 0.0 );
+//  glVertex3f( 0.0, 1.0, 0.0 );
+//  glVertex3f( 0.0, 0.0, 1.0 );
+//  glColor4fv(colorBlueDiff);
+//  glVertex3f( 0.0, 0.0, 0.0 );
+//  glVertex3f( 1.0, 0.0, 0.0 );
+//  glVertex3f( 0.0, 0.0, 1.0 );
+//  glEnd();
+
+//  // 3.2 chargement
+
   glBegin(GL_TRIANGLES);
   glColor4fv(colorBronzeDiff);
-  glVertex3f( 0.0, 0.0, 0.0 );
-  glVertex3f( 1.0, 0.0, 0.0 );
-  glVertex3f( 0.0, 1.0, 0.0 );
-  glColor4fv(colorRedDiff);
-  glVertex3f( 1.0, 0.0, 0.0 );
-  glVertex3f( 0.0, 1.0, 0.0 );
-  glVertex3f( 0.0, 0.0, 1.0 );
-  glColor4fv(colorGreenDiff);
-  glVertex3f( 0.0, 0.0, 0.0 );
-  glVertex3f( 0.0, 1.0, 0.0 );
-  glVertex3f( 0.0, 0.0, 1.0 );
-  glColor4fv(colorBlueDiff);
-  glVertex3f( 0.0, 0.0, 0.0 );
-  glVertex3f( 1.0, 0.0, 0.0 );
-  glVertex3f( 0.0, 0.0, 1.0 );
+  ptrSoup->draw();
   glEnd();
 }
 

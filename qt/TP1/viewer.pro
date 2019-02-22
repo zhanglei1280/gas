@@ -7,11 +7,13 @@ TARGET  = viewer
 CONFIG *= qt opengl release
 # config de Qt
 QT     *= opengl xml
-
+QMAKE_CXXFLAGS += -std=c++11 -fpermissive
 # Noms de vos fichiers entete
-HEADERS = Viewer.h
+HEADERS = Viewer.h \
+    Utils.h
 # Noms de vos fichiers source
-SOURCES = Viewer.cpp main.cpp
+SOURCES = Viewer.cpp main.cpp \
+    Utils.cpp
 
 ###########################################################
 # Commentez/decommentez selon votre config/systeme
@@ -34,3 +36,6 @@ LIBS *= -L/usr/lib/x86_64-linux-gnu -lQGLViewer
 # Exemple de configuration MacOSX avec frameworks
 ##  INCLUDEPATH *= /Users/login/libQGLViewer-2.6.4
 ##  LIBS *= -F/Users/login/Library/Frameworks -framework QGLViewer
+
+DISTFILES += \
+    tref.tri

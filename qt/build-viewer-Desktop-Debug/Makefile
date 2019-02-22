@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -m64 -pipe -std=c++11 -fpermissive -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../TP1 -I. -isystem /usr/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtOpenGL -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtXml -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -49,10 +49,13 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../TP1/Viewer.cpp \
-		../TP1/main.cpp 
+		../TP1/main.cpp \
+		../TP1/Utils.cpp 
 OBJECTS       = Viewer.o \
-		main.o
-DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
+		main.o \
+		Utils.o
+DIST          = ../TP1/tref.tri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/sanitize.conf \
@@ -108,8 +111,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../TP1/viewer.pro ../TP1/Viewer.h ../TP1/Viewer.cpp \
-		../TP1/main.cpp
+		../TP1/viewer.pro ../TP1/Viewer.h \
+		../TP1/Utils.h ../TP1/Viewer.cpp \
+		../TP1/main.cpp \
+		../TP1/Utils.cpp
 QMAKE_TARGET  = viewer
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = viewer
@@ -281,8 +286,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../TP1/Viewer.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TP1/Viewer.cpp ../TP1/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../TP1/Viewer.h ../TP1/Utils.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../TP1/Viewer.cpp ../TP1/main.cpp ../TP1/Utils.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -321,11 +326,16 @@ compiler_clean:
 
 ####### Compile
 
-Viewer.o: ../TP1/Viewer.cpp ../TP1/Viewer.h
+Viewer.o: ../TP1/Viewer.cpp ../TP1/Viewer.h \
+		../TP1/Utils.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Viewer.o ../TP1/Viewer.cpp
 
-main.o: ../TP1/main.cpp ../TP1/Viewer.h
+main.o: ../TP1/main.cpp ../TP1/Viewer.h \
+		../TP1/Utils.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../TP1/main.cpp
+
+Utils.o: ../TP1/Utils.cpp ../TP1/Utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Utils.o ../TP1/Utils.cpp
 
 ####### Install
 
