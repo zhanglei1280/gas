@@ -21,7 +21,8 @@ struct Vecteur {
   // composantes de soi-même et de other.
   Vecteur sup( const Vecteur& other ) const;
 
-  void log();
+  Vecteur cross( const Vecteur& v ) const;
+
   void draw();
 };
 
@@ -32,7 +33,6 @@ struct Triangle {
     Vecteur& operator[](int i);
     Vecteur operator[](int i ) const;
 
-    void log();
     void draw();
 };
 

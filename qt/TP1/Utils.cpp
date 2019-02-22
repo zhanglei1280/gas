@@ -38,6 +38,16 @@ Vecteur Vecteur::sup( const Vecteur& other ) const{
     return v;
 }
 
+// 3.4 produit vectoriel
+Vecteur cross( const Vecteur& v ) const{
+    Vecteur p (
+                xyz[1]*v[2] - xyz[2]*v[1],
+                xyz[2]*v[0] - xyz[0]*v[2],
+                xyz[0]*v[1] - xyz[1]*v[0]
+                );
+    return p;
+}
+
 Triangle::Triangle(Vecteur a, Vecteur b, Vecteur c){
     edges[0] = a;
     edges[1] = b;
@@ -114,14 +124,6 @@ std::ostream& operator<<( std::ostream& out, Triangle t ){
     }
     return out;
 }
-
-//std::ostream& operator<<( std::ostream& out, TriangleSoup s ){
-//    for(Triangle t : s.triangles){
-//        out << t;
-//    }
-//    out << std::endl;
-//    return out;
-//}
 
 void TriangleSoup::log(){
     for(Triangle t : triangles){

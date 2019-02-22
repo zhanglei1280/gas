@@ -11,6 +11,8 @@ void Viewer::draw()
   float colorRedDiff   [4] = { 1.0, 0.0, 0.0, 1.0 };
   float colorGreenDiff [4] = { 0.0, 1.0, 0.0, 1.0 };
   float colorBlueDiff  [4] = { 0.0, 0.0, 1.0, 1.0 };
+  float colorBronzeSpec[4] = { 1.0, 1.0, 0.4, 1.0 };
+  float colorNull      [4] = { 0.0, 0.0, 0.0, 1.0 };
 
 //  // Draws triangles given by 3 vertices.
 //  glBegin(GL_TRIANGLES);
@@ -36,6 +38,9 @@ void Viewer::draw()
 
   glBegin(GL_TRIANGLES);
   glColor4fv(colorBronzeDiff);
+  glMaterialfv(GL_FRONT, GL_DIFFUSE, colorBronzeDiff);
+  glMaterialfv(GL_FRONT, GL_SPECULAR, colorBronzeSpec);
+  glMaterialf(GL_FRONT, GL_SHININESS, 20.0f );
   ptrSoup->log();
   ptrSoup->draw();
   glEnd();
