@@ -8,11 +8,23 @@ class App extends Component {
     if(!window.WebGLRenderingContext){
       alert("Guess even babel-polyfill doesn't save IE.")
     }
+
+    document.querySelector("body")
+      .addEventListener("keydown", e => {
+        console.log(e.keyCode)
+      })
+  }
+
+  onRight = e => {
+    e.preventDefault()
+    console.log("Hello")
   }
 
   render() {
     return (
-      <Q1 />
+      <div onContextMenu={this.onRight}>
+        <Q1 />
+      </div>
     )
   }
 }
