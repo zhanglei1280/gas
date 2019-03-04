@@ -23,6 +23,7 @@ class App extends Component {
   render() {
     return (
       <div onContextMenu={this.onRight}>
+        <h1>Webgl Render Test</h1>
         <Q1 />
       </div>
     )
