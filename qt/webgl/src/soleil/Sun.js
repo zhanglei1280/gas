@@ -1,14 +1,18 @@
 import {
     MeshBasicMaterial,
     SphereGeometry,
-    Mesh
+    Mesh,
+    TextureLoader
 } from "three"
+
+import sunTexture from "../images/sun_2048.jpg"
 
 export default class Etoile{
     sphere
     constructor(geometry, position){
+        const map = new TextureLoader().load(sunTexture)
         const material = new MeshBasicMaterial({
-            color: 0xffff00
+            map
         })
         // 2.1 sphere
         const geo = new SphereGeometry(...geometry)

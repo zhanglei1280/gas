@@ -4,7 +4,8 @@ import {
     PerspectiveCamera,
     PointLight,
     Group,
-    Vector3
+    Vector3,
+    PCFSoftShadowMap
 } from "three"
 
 import OrbitControls from "./js/OrbitControls"
@@ -14,6 +15,8 @@ import Sun from "./soleil/Sun"
 
 import earthTexture from "./images/earth_atmos_2048.jpg"
 import moonTexture from "./images/moon_1024.jpg"
+
+import milkyWay from "./milkyWay"
 
 // 2.3 Systeme Soleil
 export default class Soleil {
@@ -32,9 +35,11 @@ export default class Soleil {
     controls
     currentTime = Date.now()
 
+    auto = true
+
     constructor() {
-        const canvas = document.querySelector(".webglcanvas")
-        console.log(canvas)
+        const canvas = document.getElementById("soleil")
+        // console.log(canvas)
         this.renderer = new WebGLRenderer({
             canvas,
             antialias: true
@@ -51,6 +56,23 @@ export default class Soleil {
             1,
             4000
         )
+
+        this.lumiere()
+        this.placeItems()
+        this.cameraControl()
+
+    }
+
+    // 2.2 lumiere
+    lumiere = () => {
+        this.light = new PointLight(0xffffff, 1.5)
+        this.light.position.set(0, 0, 0)
+        this.scene.add(this.light)
+    }
+
+    // 2.3 etoiles
+    placeItems = () => {
+        // ./soleil/Etoile.js
         this.earth = new Etoile(
             earthTexture,
             [0.5, 32, 32],
@@ -80,14 +102,12 @@ export default class Soleil {
         this.sunGroup.position.set(0, 0, -12)
 
         this.scene.add(this.sunGroup)
+        // 2.6 background ./milkyWay.js
+        this.scene.background = milkyWay
+    }
 
-
-        // 2.2 lumiere
-        this.light = new PointLight(0xffffff, 1.5)
-        this.light.position.set(0, 0, 0)
-        this.scene.add(this.light)
-
-        // 2.5 orbit controls
+    // 2.5 orbit controls
+    cameraControl = () => {
         this.controls = new OrbitControls(
             this.camera,
             this.renderer.domElement
@@ -98,6 +118,12 @@ export default class Soleil {
         this.controls.screenSpacePanning = false;
         this.controls.minDistance = 1;
         this.controls.maxDistance = 20;
+    }
+
+    // 2.7 ombre
+    calculOmbres = () => {
+        this.renderer.shadowMap.enabled = true
+        this.renderer.shadowMap.type = PCFSoftShadowMap
     }
 
     render = () => {
@@ -112,29 +138,45 @@ export default class Soleil {
         const deltaTime = now - this.currentTime
         this.currentTime = now
         const fracTime = deltaTime / 1000
-        const angle = fracTime * Math.PI * 2;
+        const angle = fracTime * Math.PI * 20;
         // Notez que l'axe y est l'axe "vertical" usuellement.
         this.sunGroup.rotation.y += angle / 365
-        this.earthGroup.rotation.y += angle / 28; // la terre tourne en 365 jours
-        this.earth.rotation.y += angle; // et en un jour sur elle-même
-        this.moonGroup.rotation.y += angle / 28; // la lune tourne en 28 jours autour de la terre
-        //this.moon.rotation.y += angle / 28; // et en 28 jours aussi sur elle-même pour faire face à la terre
+        this.sun.rotation.y -= angle / 365
+        this.earthGroup.rotation.y += angle / 365; // la terre tourne en 365 jours
+        this.earth.rotation.y += angle / 50; // et en un jour sur elle-même
+        this.moonGroup.rotation.y += angle / 50 / 28; // la lune tourne en 28 jours autour de la terre
 
         //get hype
         //this.camera.lookAt(this.earth.matrixWorld.getPosition())
         // this.camera.position.x = 5 * Math.cos( this.earth.rotation.x );
         // this.camera.position.y = 3 * Math.sin( this.earth.rotation.y );
 
-        this.cameraAngle += (angle)/365
+        this.cameraAngle += (angle) / 365
 
         this.camera.lookAt(new Vector3().setFromMatrixPosition(this.earth.matrixWorld));
-        // this.camera.position.x = 5 * Math.cos( this.cameraAngle );
-        // this.camera.position.y = 3 * Math.sin( this.cameraAngle );
-        // this.camera.position.z = 5 * Math.sin( this.cameraAngle ) -5
+        if (this.auto) {
+            this.controls.enabled = false
+            this.camera.position.x = 5 * Math.cos(this.cameraAngle);
+            this.camera.position.y = 3 * Math.sin(this.cameraAngle);
+            this.camera.position.z = 5 * Math.sin(this.cameraAngle) - 5
+        } else {
+            this.controls.enabled = true
+            this.controls.update();
+        }
+    }
+
+    toggleAuto = () => {
+        this.auto = !(this.auto)
+        if(!this.auto){
+            this.camerainit()
+        }
+    }
+
+    camerainit = () => {
+        this.camera.position.x = 0
+        this.camera.position.y = 0
         this.camera.position.z = 1
 
-
-        this.controls.update();
     }
 
     run = () => {

@@ -8,6 +8,7 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
+    "react-toggle-button": "^2.2.0",
     "serve": "^10.1.2",
     "three": "^0.102.0"
   },
