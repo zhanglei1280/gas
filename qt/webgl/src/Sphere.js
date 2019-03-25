@@ -4,21 +4,25 @@ import {
     PerspectiveCamera,
     TextureLoader,
     MeshBasicMaterial,
-    BoxGeometry,
+    MeshPhongMaterial,
+    ShaderMaterial,
+    PointLight,
+    SphereGeometry,
     Mesh
 } from "three"
-import texture from "./images/webgl-logo-256.jpg"
+import texture from "./images/earth_atmos_2048.jpg"
 
-export default class GL {
+export default class Sphere {
 
     renderer
     scene
     camera
-    cube
+    sphere
+    light
     currentTime = Date.now()
 
     constructor(){
-        const canvas = document.querySelector("#webglcanvas")
+        const canvas = document.querySelector(".webglcanvas")
         console.log(canvas)
         this.renderer = new WebGLRenderer({
             canvas,
@@ -35,14 +39,24 @@ export default class GL {
         )
         const map = new TextureLoader().load(texture)
         const material = new MeshBasicMaterial({map})
-        const geometry = new BoxGeometry(2, 2, 2)
-        this.cube = new Mesh(geometry, material)
+        // 2.2 phong material
+        const materialPhong = new MeshPhongMaterial({
+            map
+        })
+        // 2.1 sphere
+        const geometry = new SphereGeometry(2, 32, 32)
+        this.sphere = new Mesh(geometry, materialPhong)
 
-        this.cube.position.z = -8
-        this.cube.rotation.x = Math.PI / 5
-        this.cube.rotation.y = Math.PI / 5
+        this.sphere.position.z = -8
+        this.sphere.rotation.x = Math.PI / 5
+        this.sphere.rotation.y = Math.PI / 5
 
-        this.scene.add(this.cube)
+        this.scene.add(this.sphere)
+
+        // 2.2 lumiere
+        this.light = new PointLight(0xffffff, 1.5)
+        this.light.position.set(-10,10,0)
+        this.scene.add(this.light)
     }
 
     render = () => {
@@ -58,7 +72,7 @@ export default class GL {
         this.currentTime = now
         const fracTime = deltaTime / 1000
         const angle = 0.1 * Math.PI * 2 * fracTime
-        this.cube.rotation.y += angle
+        this.sphere.rotation.y += angle
     }
 
     run = () => {

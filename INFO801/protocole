@@ -1,0 +1,44 @@
+Agent Caisse =
+    in(<|vente, string, quantite, float|>)
+    .out(<consomateur, string, code, string, quantite, float>)
+    .Caisse  
+
+Agent reservoir_plein(max) = 
+    rd(ts, <|detection_reservoir, string|>)
+    .rd(ts, <|contenu_carburant, string, ?x, float)
+    .(
+        [x >= max]
+        out(ts. <reservoir_plein, string>)
+        in(ts, <|detection_reservoir, string|>)
+        reservoir_plein(max)
+        +
+        [x < max]
+        reservoir_plein(max)
+    )
+
+Agent Detection_Code(code) = 
+    rd(ts, <|detection_code, string|>)
+    .rd(ts, <|consomateur, string, ?c, string|>)
+    .(
+        [c == code]
+        out(<user_valid, string>)
+        in(<|detection_code, string|>)
+        Detection_Code(code)
+        +
+        [c != code]
+
+    )
+    
+
+Agent Pompe_Delivre =
+    rd(ts, <|user_valid, string, code, string, ?quantite_reste, float|>)
+    .(
+        [quantite_reste > 0]
+        .out(ts, <activaton_pompe, string>)
+        .Pompe_Delivre
+        +[quantite <= 0]
+        .out(ts, <deactivaton_pompe, string>)
+        .Pompe_Delivre
+    )
+
+    
