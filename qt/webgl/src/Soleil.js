@@ -60,6 +60,7 @@ export default class Soleil {
         this.lumiere()
         this.placeItems()
         this.cameraControl()
+        this.calculOmbres()
 
     }
 
@@ -124,6 +125,16 @@ export default class Soleil {
     calculOmbres = () => {
         this.renderer.shadowMap.enabled = true
         this.renderer.shadowMap.type = PCFSoftShadowMap
+        this.light.castShadow = true;
+        // On peut aussi paramétrer la qualité du calcul
+        this.light.shadow.mapSize.width = 512;  // default
+        this.light.shadow.mapSize.height = 512; // default
+        this.light.shadow.camera.near = 0.5;    // default
+        this.light.shadow.camera.far = 50;
+        this.earth.castShadow = true;
+        this.earth.receiveShadow = true;
+        this.moon.castShadow = true;
+        this.moon.receiveShadow = true;
     }
 
     render = () => {
@@ -140,8 +151,8 @@ export default class Soleil {
         const fracTime = deltaTime / 1000
         const angle = fracTime * Math.PI * 20;
         // Notez que l'axe y est l'axe "vertical" usuellement.
+        // Figure altered for better view
         this.sunGroup.rotation.y += angle / 365
-        this.sun.rotation.y -= angle / 365
         this.earthGroup.rotation.y += angle / 365; // la terre tourne en 365 jours
         this.earth.rotation.y += angle / 50; // et en un jour sur elle-même
         this.moonGroup.rotation.y += angle / 50 / 28; // la lune tourne en 28 jours autour de la terre
@@ -173,6 +184,7 @@ export default class Soleil {
     }
 
     camerainit = () => {
+        this.controls.reset()
         this.camera.position.x = 0
         this.camera.position.y = 0
         this.camera.position.z = 1
