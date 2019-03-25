@@ -1,5 +1,4 @@
 import {
-    TextureLoader,
     MeshBasicMaterial,
     SphereGeometry,
     Mesh

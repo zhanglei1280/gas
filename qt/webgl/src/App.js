@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Q1 from "./Q1"
+import Q2 from "./Q2"
 
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   onRight = e => {
-    e.preventDefault()
+    if(e) e.preventDefault()
     console.log("Hello")
   }
 
@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div onContextMenu={this.onRight}>
         <h1>Webgl Render Test</h1>
-        <Q1 />
+        <Q2 />
       </div>
     )
   }

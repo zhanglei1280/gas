@@ -4,7 +4,9 @@
  * @author paulirish / http://paulirish.com/
  */
 
-THREE.FirstPersonControls = function ( object, domElement ) {
+import * as THREE from "three"
+
+export default function ( object, domElement ) {
 
 	this.object = object;
 	this.target = new THREE.Vector3( 0, 0, 0 );

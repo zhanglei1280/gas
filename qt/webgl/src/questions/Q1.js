@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import Cube from "./Cube"
-import Sphere from "./Sphere"
-import Soleil from "./Soleil"
-import "./css/basic.css"
+import Cube from "../Cube"
 
 class Q1 extends Component {
 
   componentDidMount = () => {
-    const gl = new Soleil()
+    const gl = new Cube()
     gl.run()
   }
 
@@ -19,7 +16,7 @@ class Q1 extends Component {
         border: "none",
         backgroundColor: "black"
       }}
-      width="1200" height="1200"
+      width="600" height="500"
       >
       </canvas>
     );

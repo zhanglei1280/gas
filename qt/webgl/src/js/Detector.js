@@ -76,3 +76,6 @@ if ( typeof module === 'object' ) {
 	module.exports = Detector;
 
 }
+
+// ES6 support
+export default Detector
