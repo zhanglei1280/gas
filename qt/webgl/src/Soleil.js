@@ -20,6 +20,7 @@ export default class Soleil {
     renderer
     scene
     camera
+    cameraAngle = 0
     earth
     moon
     sun
@@ -53,8 +54,8 @@ export default class Soleil {
 
         this.moon = new Etoile(
             moonTexture,
-            [0.2, 32, 32],
-            [0, 0, 0]
+            [0.2, 32, 32], // geometry
+            [0, 0, 0] // position
         ).toObject()
         
         this.sun = new Sun(
@@ -67,7 +68,7 @@ export default class Soleil {
         this.sunGroup = new Group()
 
         this.moonGroup.add(this.moon)
-        this.moonGroup.position.set(5, 0, -8)
+        this.moonGroup.position.set(5, 0, -6)
         this.earthGroup.add(this.earth, this.moonGroup)
         this.earthGroup.position.set(5, 0, -7)
         this.sunGroup.add(this.sun, this.earthGroup)
@@ -78,7 +79,7 @@ export default class Soleil {
 
         // 2.2 lumiere
         this.light = new PointLight(0xffffff, 1.5)
-        this.light.position.set(-10,10,0)
+        this.light.position.set(0,0,0)
         this.scene.add(this.light)
     }
 
@@ -100,6 +101,18 @@ export default class Soleil {
         this.earth.rotation.y      += angle; // et en un jour sur elle-même
         this.moonGroup.rotation.y  += angle / 28; // la lune tourne en 28 jours autour de la terre
         this.moon.rotation.y       += angle /28; // et en 28 jours aussi sur elle-même pour faire face à la terre
+    
+        //get hype
+        this.camera.lookAt(this.earth.matrixWorld.getPosition())
+        this.camera.position.x = 5 * Math.cos( this.earth.rotation.x );
+        this.camera.position.y = 3 * Math.sin( this.earth.rotation.y );
+
+        // this.cameraAngle += angle/365
+        
+        // this.camera.lookAt( this.earth.matrixWorld.getPosition() );
+        // this.camera.position.x = 5 * Math.cos( this.cameraAngle );
+        // this.camera.position.y = 3 * Math.sin( this.cameraAngle );
+
     }
 
     run = () => {
